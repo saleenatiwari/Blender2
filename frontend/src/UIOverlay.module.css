@@ -114,6 +114,12 @@
   background: rgba(255, 20, 147, 0.08);
 }
 
+.panelItemActive {
+  border-color: rgba(255, 77, 248, 0.75);
+  background: rgba(255, 77, 248, 0.12);
+  color: rgba(255, 255, 255, 0.98);
+}
+
 .bottomBar {
   position: absolute;
   bottom: 1.5rem;

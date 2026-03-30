@@ -1,0 +1,77 @@
+/* ── Container — fills the exhibition area, allows vertical scroll ── */
+.container {
+  position: absolute;
+  inset: 0;
+  background: transparent;
+  overflow-y: auto;
+  overflow-x: hidden;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 1rem 0;
+
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.12) transparent;
+}
+
+.container::-webkit-scrollbar        { width: 4px; }
+.container::-webkit-scrollbar-track  { background: transparent; }
+.container::-webkit-scrollbar-thumb  { background: rgba(255,255,255,0.12); border-radius: 2px; }
+
+/* ── ASCII pre block ─────────────────────────────────────────────── */
+.pre {
+  font-family: 'Courier New', Courier, monospace;
+  /*
+    Target: all ~400 columns must fit inside 70 vw (minus 3.5 rem padding).
+    Courier New char-width ≈ 0.6 × font-size.
+    At 1440 px: usable = 0.70×1440 − 56 ≈ 952 px → max fontSize ≈ 952/400/0.6 ≈ 3.97 px
+    clamp keeps it readable on large screens and tiny on small ones.
+  */
+  font-size: clamp(2px, 0.26vw, 3.8px);
+  line-height: 1.05;
+  white-space: pre;
+  margin: 0;
+  padding: 1.75rem;
+  width: 70vw;
+  max-width: 100%;
+  color: #ffffff;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  letter-spacing: 0;
+}
+
+/* ── Line & char ─────────────────────────────────────────────────── */
+.line {
+  display: block;
+  margin: 0;
+  padding: 0;
+}
+
+.char {
+  display: inline;
+  position: relative;
+  cursor: default;
+  transition:
+    color       0.15s ease-out,
+    text-shadow 0.4s  ease-out;
+}
+
+/* Glow is applied via JS (glowColor / glowShadow) — no CSS hover needed */
+
+/* ── Cursor trail flair dots ─────────────────────────────────────── */
+.flair {
+  position: fixed;
+  top: 0;
+  left: 0;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  background: #ff4df8;
+  box-shadow:
+    0 0 4px  rgba(255, 77, 248, 0.90),
+    0 0 10px rgba(255, 77, 248, 0.65),
+    0 0 18px rgba(255, 77, 248, 0.35),
+    0 0 28px rgba(255, 77, 248, 0.15);
+  /* transform set by GSAP (xPercent/yPercent + x/y) */
+}

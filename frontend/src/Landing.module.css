@@ -83,85 +83,78 @@
 }
 
 .title {
-  margin: 0 0 2.5rem;
-  font-weight: 600;
-  line-height: 1.15;
-  letter-spacing: -0.02em;
+  margin: 0 0 1.6rem;
+  text-align: center;
+  line-height: 1;
+  letter-spacing: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.08rem;
 }
 
-.lineLarge {
+.scriptLine {
   display: block;
-  font-size: clamp(1.75rem, 5vw, 2.75rem);
-  margin-bottom: 0.35rem;
+  font-family: 'Great Vibes', cursive;
+  font-weight: 400;
+  font-size: clamp(2.8rem, 13vh, 8.5rem);
+  color: #ff4df8;
+  letter-spacing: 0.5px;
+  text-shadow:
+    0 0 2px rgba(255, 77, 248, 0.95),
+    0 0 6px rgba(255, 77, 248, 0.9),
+    0 0 14px rgba(255, 77, 248, 0.75),
+    0 0 28px rgba(255, 77, 248, 0.45),
+    0 0 56px rgba(255, 77, 248, 0.25);
+  animation: neonFlicker 3.9s ease-in-out infinite;
+  margin: 0;
 }
 
-.lineSmall {
+.sansLine {
   display: block;
-  font-size: clamp(1.1rem, 2.8vw, 1.45rem);
-  margin-top: 0.75rem;
-  opacity: 0.92;
-}
-
-.rest {
-  font-size: 0.65em;
-  font-weight: 500;
-  color: rgba(255, 182, 214, 0.85);
+  font-family: ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, Arial,
+    sans-serif;
+  font-size: clamp(1.05rem, 2.5vw, 1.55rem);
+  color: rgba(255, 77, 248, 0.95);
   text-shadow:
-    0 0 8px rgba(255, 20, 147, 0.35),
-    0 0 20px rgba(255, 20, 147, 0.2);
+    0 0 2px rgba(255, 77, 248, 0.7),
+    0 0 10px rgba(255, 77, 248, 0.35);
+  margin-top: 0.65rem;
 }
 
-.flicker {
-  color: #ffb7d5;
-  text-shadow:
-    0 0 6px rgba(255, 20, 147, 0.95),
-    0 0 18px rgba(255, 20, 147, 0.65),
-    0 0 36px rgba(255, 20, 147, 0.45),
-    0 0 56px rgba(255, 0, 128, 0.25);
-  animation: flicker 4.2s ease-in-out infinite;
-}
-
-.with {
-  color: rgba(255, 200, 230, 0.88);
-  text-shadow:
-    0 0 10px rgba(255, 20, 147, 0.5),
-    0 0 24px rgba(255, 20, 147, 0.25);
-  font-weight: 500;
-}
-
-@keyframes flicker {
+@keyframes neonFlicker {
   0%,
   100% {
     opacity: 1;
     filter: brightness(1);
   }
-  45% {
-    opacity: 0.88;
-    filter: brightness(0.92);
+  30% {
+    opacity: 0.9;
+    filter: brightness(0.97);
   }
-  48% {
+  32% {
     opacity: 1;
     filter: brightness(1.08);
   }
-  52% {
-    opacity: 0.9;
-    filter: brightness(0.95);
+  58% {
+    opacity: 0.92;
+    filter: brightness(0.98);
   }
-  70% {
+  60% {
     opacity: 1;
-    filter: brightness(1);
+    filter: brightness(1.02);
   }
 }
 
 .cta {
   display: inline-block;
-  margin: 0 auto 1.75rem;
+  margin: 0 auto 1.15rem;
   padding: 0.85rem 2rem;
   font: inherit;
   font-size: 1rem;
   font-weight: 500;
   letter-spacing: 0.06em;
-  text-transform: uppercase;
+  text-transform: none;
   color: #fff;
   background: transparent;
   border: 2px solid rgba(255, 255, 255, 0.85);
@@ -178,9 +171,9 @@
   border-color: rgba(255, 20, 147, 0.95);
   color: #ffe6f4;
   box-shadow:
-    0 0 20px rgba(255, 20, 147, 0.35),
-    inset 0 0 20px rgba(255, 20, 147, 0.08);
-  transform: translateY(-1px);
+    0 0 24px rgba(255, 77, 248, 0.35),
+    inset 0 0 22px rgba(255, 77, 248, 0.1);
+  transform: scale(1.035);
 }
 
 .cta:active {
@@ -191,7 +184,7 @@
   margin: 0;
   font-size: 0.78rem;
   line-height: 1.5;
-  color: rgba(255, 255, 255, 0.42);
+  color: rgba(255, 255, 255, 0.7);
   max-width: 26rem;
   margin-left: auto;
   margin-right: auto;

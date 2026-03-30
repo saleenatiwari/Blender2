@@ -1,0 +1,66 @@
+.panel {
+  position: relative;
+  background: rgba(0, 0, 0, 0.85);
+  width: min(900px, 92vw);
+  height: min(500px, 72vh);
+  padding: 20px;
+  border-radius: 12px;
+  overflow: hidden;
+  pointer-events: auto;
+  animation: panelIn 550ms ease-out both;
+}
+
+.pre {
+  margin: 0;
+  font-family: 'Courier New', Courier, monospace;
+  white-space: pre;
+  font-size: 8px;
+  line-height: 1.1;
+  user-select: none;
+}
+
+.layerDim {
+  position: absolute;
+  inset: 20px;
+  overflow: hidden;
+}
+
+.layerBright {
+  position: absolute;
+  inset: 20px;
+  overflow: hidden;
+  -webkit-mask-image: radial-gradient(
+    circle at var(--mx) var(--my),
+    rgba(255, 255, 255, 1) 0%,
+    rgba(255, 255, 255, 1) 100px,
+    rgba(255, 255, 255, 0) 120px
+  );
+  mask-image: radial-gradient(
+    circle at var(--mx) var(--my),
+    rgba(255, 255, 255, 1) 0%,
+    rgba(255, 255, 255, 1) 100px,
+    rgba(255, 255, 255, 0) 120px
+  );
+}
+
+.layerDim .pre {
+  color: rgba(255, 255, 255, 0.3);
+}
+
+.layerBright .pre {
+  color: rgba(255, 255, 255, 1);
+  font-weight: 700;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.18);
+}
+
+@keyframes panelIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px) scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+

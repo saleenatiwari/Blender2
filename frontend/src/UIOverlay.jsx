@@ -3,9 +3,17 @@ import styles from './UIOverlay.module.css'
 const projects = [
   { id: '1', label: 'Project 1' },
   { id: '2', label: 'Project 2' },
+  { id: '3', label: 'Project 3' },
 ]
 
-export default function UIOverlay({ menuOpen, onToggleMenu, onSelectProject }) {
+export default function UIOverlay({
+  menuOpen,
+  onToggleMenu,
+  onSelectProject,
+  activeProjectId,
+  onBack,
+  onNext,
+}) {
   return (
     <div className={styles.overlay}>
       <button
@@ -36,10 +44,11 @@ export default function UIOverlay({ menuOpen, onToggleMenu, onSelectProject }) {
             <li key={p.id}>
               <button
                 type="button"
-                className={styles.panelItem}
+                className={`${styles.panelItem} ${
+                  Number(activeProjectId) === Number(p.id) ? styles.panelItemActive : ''
+                }`}
                 onClick={() => {
-                  console.log('Selected:', p.label)
-                  onSelectProject?.(p)
+                  onSelectProject?.(Number(p.id))
                 }}
               >
                 {p.label}
@@ -50,10 +59,10 @@ export default function UIOverlay({ menuOpen, onToggleMenu, onSelectProject }) {
       </aside>
 
       <div className={styles.bottomBar}>
-        <button type="button" className={styles.glassBtn}>
+        <button type="button" className={styles.glassBtn} onClick={onBack}>
           Back
         </button>
-        <button type="button" className={styles.glassBtn}>
+        <button type="button" className={styles.glassBtn} onClick={onNext}>
           Next
         </button>
       </div>
