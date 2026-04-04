@@ -22,7 +22,7 @@ function CameraEntrance() {
 }
 
 // ── The 3D model + animation ──────────────────────────────────────────
-function TableclothModel({ scrubTime, playing }) {
+function TableclothModel({ scrubTime, playing, onDuration }) {
   const group = useRef()
   const { scene, animations } = useGLTF(tableclothUrl)
   const { actions, mixer } = useAnimations(animations, group)
@@ -30,6 +30,15 @@ function TableclothModel({ scrubTime, playing }) {
   // Names of all clips in the GLB
   const clipNames = animations.map((a) => a.name)
   const hasAnim   = clipNames.length > 0
+
+  // Report the real clip duration (in ms) to the parent once on load
+  useEffect(() => {
+    if (!hasAnim || !onDuration) return
+    const action = actions[clipNames[0]]
+    if (!action) return
+    const durationSec = action.getClip().duration
+    onDuration(durationSec * 1000)
+  }, [hasAnim, actions, clipNames, onDuration])
 
   // Play / pause the first clip based on the `playing` prop
   useEffect(() => {
@@ -175,7 +184,11 @@ export default function Project3Tablecloth() {
         gl={{ antialias: true, alpha: false }}
       >
         <color attach="background" args={['#050508']} />
-        <TableclothModel scrubTime={scrubTime} playing={playing} />
+        <TableclothModel
+          scrubTime={scrubTime}
+          playing={playing}
+          onDuration={(ms) => { durationMs.current = ms }}
+        />
         <CameraEntrance />
         <OrbitControls
           enableDamping
