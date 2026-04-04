@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom'
 import styles from './UIOverlay.module.css'
 
 const projects = [
@@ -14,6 +15,8 @@ export default function UIOverlay({
   onBack,
   onNext,
 }) {
+  const navigate = useNavigate()
+
   return (
     <div className={styles.overlay}>
       <button
@@ -39,6 +42,16 @@ export default function UIOverlay({
         aria-hidden={!menuOpen}
       >
         <p className={styles.panelTitle}>Menu</p>
+        <button
+          type="button"
+          className={`${styles.panelItem} ${styles.panelHome}`}
+          onClick={() => {
+            onToggleMenu()
+            navigate('/')
+          }}
+        >
+          Home
+        </button>
         <ul className={styles.list}>
           {projects.map((p) => (
             <li key={p.id}>

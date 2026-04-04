@@ -24,10 +24,6 @@ export default function Landing() {
           Start Experience
         </button>
 
-        <p className={styles.note}>
-          Note: Please use Chrome on desktop for the best experience. This is a 3D interactive site
-          and may lag on low-performance devices.
-        </p>
       </main>
     </div>
   )

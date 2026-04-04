@@ -88,6 +88,10 @@
   color: rgba(255, 255, 255, 0.45);
 }
 
+.panelHome {
+  margin-bottom: 1.25rem;
+}
+
 .list {
   list-style: none;
   margin: 0;
