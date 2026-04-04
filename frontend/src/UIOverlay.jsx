@@ -5,6 +5,7 @@ const projects = [
   { id: '1', label: 'Project 1' },
   { id: '2', label: 'Project 2' },
   { id: '3', label: 'Project 3' },
+  { id: '4', label: 'Project 4' },
 ]
 
 export default function UIOverlay({

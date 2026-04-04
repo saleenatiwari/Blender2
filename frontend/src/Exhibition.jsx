@@ -4,8 +4,11 @@ import gsap from 'gsap'
 import { useNavigate } from 'react-router-dom'
 import Scene from './Scene'
 import UIOverlay from './UIOverlay'
-import Project3Ascii from './Project3Ascii'
+import ProjectPlaceholder from './ProjectPlaceholder'
+import Project3Tablecloth from './Project3Tablecloth'
 import styles from './Exhibition.module.css'
+
+const TOTAL_PROJECTS = 4
 
 export default function Exhibition() {
   const navigate = useNavigate()
@@ -16,7 +19,6 @@ export default function Exhibition() {
   useEffect(() => {
     const el = rootRef.current
     if (!el) return
-
     gsap.fromTo(
       el,
       { opacity: 0 },
@@ -29,7 +31,8 @@ export default function Exhibition() {
       <div
         className={`${styles.contentHost} ${menuOpen ? styles.contentHostBlurred : ''}`}
       >
-        {activeProjectId !== 3 && (
+        {/* Projects 1 & 2 — shared 3D canvas */}
+        {(activeProjectId === 1 || activeProjectId === 2) && (
           <Canvas
             shadows
             camera={{ position: [0, 1.5, 4.5], fov: 48, near: 0.1, far: 100 }}
@@ -39,7 +42,11 @@ export default function Exhibition() {
           </Canvas>
         )}
 
-        {activeProjectId === 3 && <Project3Ascii active />}
+        {/* Project 3 — tablecloth animation with scrubber */}
+        {activeProjectId === 3 && <Project3Tablecloth />}
+
+        {/* Project 4 — placeholder */}
+        {activeProjectId === 4 && <ProjectPlaceholder number={4} />}
       </div>
 
       <UIOverlay
@@ -62,7 +69,7 @@ export default function Exhibition() {
         }}
         onNext={() => {
           setMenuOpen(false)
-          setActiveProjectId((curr) => Math.min(3, curr + 1))
+          setActiveProjectId((curr) => Math.min(TOTAL_PROJECTS, curr + 1))
         }}
       />
     </div>

@@ -6,7 +6,7 @@ import mugUrl from './assets/Mug1_self.glb'
 import pinBoardUrl from './assets/PinBoard1.glb'
 
 // ── Camera entrance (unchanged) ───────────────────────────────────────
-function CameraEntrance() {
+function CameraEntrance({ target = null }) {
   const { camera } = useThree()
   const done = useRef(false)
 
@@ -14,7 +14,7 @@ function CameraEntrance() {
     if (done.current) return
     done.current = true
 
-    const end = {
+    const end = target ?? {
       x: camera.position.x,
       y: camera.position.y,
       z: camera.position.z,
@@ -39,17 +39,14 @@ function MugScene() {
 
   return (
     <>
-      {/* Ambient — ensures no face is completely black */}
-      <ambientLight intensity={1.2} />
+      {/* Dim ambient — dark side is shadowed but not pitch black */}
+      <ambientLight intensity={0.18} color="#fff8f0" />
 
-      {/* Key light — directly in front and slightly above, main illumination */}
-      <directionalLight position={[1, 3, 5]} intensity={3.5} />
+      {/* Key light — front-left, slightly above, warm window light */}
+      <directionalLight position={[-2, 4, 5]} intensity={1.2} color="#ffe8c8" />
 
-      {/* Fill light — front-left, softer, opens up shadow side */}
-      <directionalLight position={[-3, 1, 4]} intensity={1.8} />
-
-      {/* Top light — adds definition to the top surface */}
-      <directionalLight position={[0, 5, 1]} intensity={1.0} />
+      {/* Fill — front-right, very soft, just lifts the shadow side */}
+      <directionalLight position={[3, 1, 4]} intensity={0.35} color="#ddeeff" />
 
       <group>
         <Center>
@@ -66,19 +63,24 @@ function PinBoardScene() {
 
   return (
     <>
-      {/* Ambient — ensures no face is completely black */}
-      <ambientLight intensity={1.2} />
+      {/* Dim ambient — room has some bounce light, nothing is fully black */}
+      <ambientLight intensity={0.22} color="#fff5e8" />
 
-      {/* Key light — directly in front and slightly above, main illumination */}
-      <directionalLight position={[1, 3, 5]} intensity={3.5} />
+      {/* Key light — overhead and slightly forward, like a ceiling fixture */}
+      <directionalLight position={[0, 5, 3]} intensity={1.1} color="#fff4e0" castShadow
+        shadow-mapSize={[1024, 1024]}
+        shadow-camera-near={0.5}
+        shadow-camera-far={20}
+        shadow-camera-left={-4}
+        shadow-camera-right={4}
+        shadow-camera-top={4}
+        shadow-camera-bottom={-4}
+      />
 
-      {/* Fill light — front-left, softer, opens up shadow side */}
-      <directionalLight position={[-3, 1, 4]} intensity={1.8} />
+      {/* Soft fill — front-left, lifts the lower left without washing out */}
+      <directionalLight position={[-2, 1, 4]} intensity={0.3} color="#ffffff" />
 
-      {/* Top light — adds definition to the top surface */}
-      <directionalLight position={[0, 5, 1]} intensity={1.0} />
-
-      <group>
+      <group rotation={[0, Math.PI, 0]}>
         <Center>
           <primitive object={scene} scale={2} />
         </Center>
@@ -96,11 +98,12 @@ export default function Scene({ projectId = 1 }) {
 {projectId === 1 && <MugScene />}
       {projectId === 2 && <PinBoardScene />}
 
-      <CameraEntrance />
+      <CameraEntrance target={projectId === 1 ? { x: 0, y: 1.5, z: 7 } : null} />
 
       <OrbitControls
         enableDamping
-        dampingFactor={0.06}
+        dampingFactor={0.05}
+        zoomSpeed={0.5}
         minDistance={2.5}
         maxDistance={12}
         maxPolarAngle={Math.PI / 2 - 0.08}
