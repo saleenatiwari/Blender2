@@ -135,6 +135,19 @@
   pointer-events: none;
 }
 
+.dateLabel {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 0.75rem;
+  font-size: 0.75rem;
+  color: rgba(30, 30, 30, 0.85);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  pointer-events: none;
+  user-select: none;
+}
+
 .glassBtn {
   pointer-events: auto;
   padding: 0.65rem 1.35rem;

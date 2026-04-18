@@ -2,10 +2,9 @@ import { useEffect, useRef, useState } from 'react'
 import styles from './RareBeautyHero.module.css'
 
 const TOTAL_FRAMES = 120
-const FRAME_BASE = '/frames/project4/frame_'
 
-function frameSrc(n) {
-  return `${FRAME_BASE}${String(n).padStart(4, '0')}.png`
+function frameSrc(i) {
+  return `/frames/project4/project4'${String(i).padStart(4, '0')}.jpg`
 }
 
 export default function RareBeautyHero() {
@@ -14,6 +13,7 @@ export default function RareBeautyHero() {
   const imagesRef = useRef([])
   const rafRef = useRef(null)
   const [loaded, setLoaded] = useState(false)
+  const [textVisible, setTextVisible] = useState(false)
 
   useEffect(() => {
     const images = []
@@ -66,6 +66,8 @@ export default function RareBeautyHero() {
         let progress = scrolled / scrollable
         progress = Math.max(0, Math.min(1, progress))
 
+        setTextVisible(progress >= 0.75 && progress < 0.95)
+
         const frameIndex = Math.round(progress * (TOTAL_FRAMES - 1))
         drawFrame(frameIndex)
       })
@@ -94,6 +96,9 @@ export default function RareBeautyHero() {
           className={styles.canvas}
           style={{ opacity: loaded ? 1 : 0 }}
         />
+        <span className={styles.textOverlay} style={{ opacity: textVisible ? 1 : 0 }}>
+          RARE BEAUTY
+        </span>
       </div>
     </div>
   )

@@ -76,6 +76,9 @@ export default function UIOverlay({
         <button type="button" className={styles.glassBtn} onClick={onBack}>
           Back
         </button>
+        <span className={styles.dateLabel}>
+          {{ '1': 'March 2026', '2': 'March 2026', '3': 'April 2026', '4': 'April 2026' }[String(activeProjectId)]}
+        </span>
         <button type="button" className={styles.glassBtn} onClick={onNext}>
           Next
         </button>
