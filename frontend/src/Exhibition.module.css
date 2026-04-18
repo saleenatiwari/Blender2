@@ -21,3 +21,16 @@
   width: 100% !important;
   height: 100% !important;
 }
+
+/* Project 4 — let the tall scroll container expand the page */
+.contentHostScrollable {
+  position: relative;
+  inset: auto;
+  height: auto;
+}
+
+/* In scrollable mode the canvas is sized by RareBeautyHero's own CSS */
+.contentHostScrollable canvas {
+  width: 100% !important;
+  height: 100% !important;
+}

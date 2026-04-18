@@ -6,6 +6,7 @@ import Scene from './Scene'
 import UIOverlay from './UIOverlay'
 import ProjectPlaceholder from './ProjectPlaceholder'
 import Project3Tablecloth from './Project3Tablecloth'
+import RareBeautyHero from './components/RareBeautyHero'
 import styles from './Exhibition.module.css'
 
 const TOTAL_PROJECTS = 4
@@ -26,10 +27,16 @@ export default function Exhibition() {
     )
   }, [])
 
+  // Scroll to top whenever the active project changes so Project 4 always
+  // starts at frame 1, and other projects don't inherit a scrolled position.
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [activeProjectId])
+
   return (
     <div ref={rootRef} className={styles.root}>
       <div
-        className={`${styles.contentHost} ${menuOpen ? styles.contentHostBlurred : ''}`}
+        className={`${styles.contentHost} ${menuOpen ? styles.contentHostBlurred : ''} ${activeProjectId === 4 ? styles.contentHostScrollable : ''}`}
       >
         {/* Projects 1 & 2 — shared 3D canvas */}
         {(activeProjectId === 1 || activeProjectId === 2) && (
@@ -45,8 +52,8 @@ export default function Exhibition() {
         {/* Project 3 — tablecloth animation with scrubber */}
         {activeProjectId === 3 && <Project3Tablecloth />}
 
-        {/* Project 4 — placeholder */}
-        {activeProjectId === 4 && <ProjectPlaceholder number={4} />}
+        {/* Project 4 — Rare Beauty ad */}
+        {activeProjectId === 4 && <RareBeautyHero />}
       </div>
 
       <UIOverlay
