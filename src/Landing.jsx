@@ -12,7 +12,7 @@ export default function Landing() {
       <main className={styles.content}>
         <h1 className={styles.title}>
           <span className={styles.scriptLine}>Welcome to</span>
-          <span className={styles.scriptLine}>Saleena&rsquo;s 3D Exhibition</span>
+          <span className={styles.scriptLine}>my 3D Exhibition</span>
           <span className={styles.scriptLine}>with Blender</span>
         </h1>
 
